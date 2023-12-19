@@ -3,17 +3,17 @@
 
 #include <SFML/Graphics/CircleShape.hpp>
 
-Game::Game() : m_context(std::make_shared<Context>()) //инициализация указателя на объект структуры Context при создании объекта
+Game::Game() : m_context(std::make_shared<Context>()) //РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° РѕР±СЉРµРєС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹ Context РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р°
 {
-    m_context->m_window->create(sf::VideoMode(1300, 704), "Classic Snake", sf::Style::Close); //создание начального окна заданных размеров с кнопкой закрытия
-    m_context->m_states->Add(std::make_unique<MainMenu>(m_context)); //добавление нового состояния MainMenu в стек 
+    m_context->m_window->create(sf::VideoMode(1300, 704), "Classic Snake", sf::Style::Close); //СЃРѕР·РґР°РЅРёРµ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РѕРєРЅР° Р·Р°РґР°РЅРЅС‹С… СЂР°Р·РјРµСЂРѕРІ СЃ РєРЅРѕРїРєРѕР№ Р·Р°РєСЂС‹С‚РёСЏ
+    m_context->m_states->Add(std::make_unique<MainMenu>(m_context)); //РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ MainMenu РІ СЃС‚РµРє 
 }
 
 Game::~Game()
 {
 }
 
-void Game::Run() //функция, которая беспрерывно обрабатывает ввод, обновляет и рисует текущее состояние игры в соответствии с таймером
+void Game::Run() //С„СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ Р±РµСЃРїСЂРµСЂС‹РІРЅРѕ РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ РІРІРѕРґ, РѕР±РЅРѕРІР»СЏРµС‚ Рё СЂРёСЃСѓРµС‚ С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂС‹ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ С‚Р°Р№РјРµСЂРѕРј
 {
     sf::Clock clock;
     sf::Time timeSinceeLastFrame = sf::Time::Zero;
@@ -34,7 +34,7 @@ void Game::Run() //функция, которая беспрерывно обрабатывает ввод, обновляет и р
     }
 }
 
-//адаптация c#
+//Р°РґР°РїС‚Р°С†РёСЏ c#
 //namespace Game{
 //public void Run()
 //{
