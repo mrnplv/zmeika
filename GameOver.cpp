@@ -15,48 +15,48 @@ GameOver::GameOver(std::shared_ptr<Context>& context)
 GameOver::~GameOver()
 {
 }
-void GameOver::ProcessInput() //ôóíêöèÿ äëÿ îáðàáîòêè ââîäà ïîëüçîâàòåëÿ è îáíîâëåíèÿ ñîñòîÿíèÿ â ñîîòâ. ñ ââîäîì
+void GameOver::ProcessInput() //Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¿ Ã¤Ã«Ã¿ Ã®Ã¡Ã°Ã Ã¡Ã®Ã²ÃªÃ¨ Ã¢Ã¢Ã®Ã¤Ã  Ã¯Ã®Ã«Ã¼Ã§Ã®Ã¢Ã Ã²Ã¥Ã«Ã¿ Ã¨ Ã®Ã¡Ã­Ã®Ã¢Ã«Ã¥Ã­Ã¨Ã¿ Ã±Ã®Ã±Ã²Ã®Ã¿Ã­Ã¨Ã¿ Ã¢ Ã±Ã®Ã®Ã²Ã¢. Ã± Ã¢Ã¢Ã®Ã¤Ã®Ã¬
 {
     sf::Event event;
-    while (m_context->m_window->pollEvent(event)) //ïîêà åñòü íåçàâåðøåííûå ñîáûòèÿ
+    while (m_context->m_window->pollEvent(event)) //Ã¯Ã®ÃªÃ  Ã¥Ã±Ã²Ã¼ Ã­Ã¥Ã§Ã Ã¢Ã¥Ã°Ã¸Ã¥Ã­Ã­Ã»Ã¥ Ã±Ã®Ã¡Ã»Ã²Ã¨Ã¿
     {
-        if (event.type == sf::Event::Closed) //åñëè èìååò ìåñòî ñîáûòèå çàêðûòèÿ îêíà
+        if (event.type == sf::Event::Closed) //Ã¥Ã±Ã«Ã¨ Ã¨Ã¬Ã¥Ã¥Ã² Ã¬Ã¥Ã±Ã²Ã® Ã±Ã®Ã¡Ã»Ã²Ã¨Ã¥ Ã§Ã ÃªÃ°Ã»Ã²Ã¨Ã¿ Ã®ÃªÃ­Ã 
         {
-            m_context->m_window->close(); //çàêðûòü îêíî
+            m_context->m_window->close(); //Ã§Ã ÃªÃ°Ã»Ã²Ã¼ Ã®ÃªÃ­Ã®
         }
-        else if (event.type == sf::Event::KeyPressed) //åñëè æå íàæàòà êíîïêà
+        else if (event.type == sf::Event::KeyPressed) //Ã¥Ã±Ã«Ã¨ Ã¦Ã¥ Ã­Ã Ã¦Ã Ã²Ã  ÃªÃ­Ã®Ã¯ÃªÃ 
         {
             switch (event.key.code)
             {
-            case sf::Keyboard::Up: //íàæàòà êíîïêà ââåðõ
+            case sf::Keyboard::Up: //Ã­Ã Ã¦Ã Ã²Ã  ÃªÃ­Ã®Ã¯ÃªÃ  Ã¢Ã¢Ã¥Ã°Ãµ
             {
-                if (!m_isRetryButtonSelected) //åñëè êíîïêà Retry íå áûëà âûáðàíà
+                if (!m_isRetryButtonSelected) //Ã¥Ã±Ã«Ã¨ ÃªÃ­Ã®Ã¯ÃªÃ  Retry Ã­Ã¥ Ã¡Ã»Ã«Ã  Ã¢Ã»Ã¡Ã°Ã Ã­Ã 
                 {
-                    m_isRetryButtonSelected = true; //òî ñòàíîâèòñÿ âûáðàííîé
-                    m_isExitButtonSelected = false; //à Exit - íåâûáðàííîé
+                    m_isRetryButtonSelected = true; //Ã²Ã® Ã±Ã²Ã Ã­Ã®Ã¢Ã¨Ã²Ã±Ã¿ Ã¢Ã»Ã¡Ã°Ã Ã­Ã­Ã®Ã©
+                    m_isExitButtonSelected = false; //Ã  Exit - Ã­Ã¥Ã¢Ã»Ã¡Ã°Ã Ã­Ã­Ã®Ã©
                 }
                 break;
             }
-            case sf::Keyboard::Down: //íàæàòà êíîïêà âíèç
+            case sf::Keyboard::Down: //Ã­Ã Ã¦Ã Ã²Ã  ÃªÃ­Ã®Ã¯ÃªÃ  Ã¢Ã­Ã¨Ã§
             {
-                if (!m_isExitButtonSelected) //åñëè êíîïêà Exit íå áûëà âûáðàíà
+                if (!m_isExitButtonSelected) //Ã¥Ã±Ã«Ã¨ ÃªÃ­Ã®Ã¯ÃªÃ  Exit Ã­Ã¥ Ã¡Ã»Ã«Ã  Ã¢Ã»Ã¡Ã°Ã Ã­Ã 
                 {
-                    m_isRetryButtonSelected = false; //êíîïêà Retry ñòàíîâèòñÿ íåâûáðàííîé
-                    m_isExitButtonSelected = true; //à Exit - âûáðàííîé
+                    m_isRetryButtonSelected = false; //ÃªÃ­Ã®Ã¯ÃªÃ  Retry Ã±Ã²Ã Ã­Ã®Ã¢Ã¨Ã²Ã±Ã¿ Ã­Ã¥Ã¢Ã»Ã¡Ã°Ã Ã­Ã­Ã®Ã©
+                    m_isExitButtonSelected = true; //Ã  Exit - Ã¢Ã»Ã¡Ã°Ã Ã­Ã­Ã®Ã©
                 }
                 break;
             }
-            case sf::Keyboard::Return: //íàæàò Enter
+            case sf::Keyboard::Return: //Ã­Ã Ã¦Ã Ã² Enter
             {
                 m_isExitButtonPressed = false;
                 m_isRetryButtonPressed = false;
-                if (m_isExitButtonSelected) //åñëè âûáðàí Exit
+                if (m_isExitButtonSelected) //Ã¥Ã±Ã«Ã¨ Ã¢Ã»Ã¡Ã°Ã Ã­ Exit
                 {
-                    m_isExitButtonPressed = true; //êíîïêà Exit ñòàíîâèòñÿ íàæàòîé
+                    m_isExitButtonPressed = true; //ÃªÃ­Ã®Ã¯ÃªÃ  Exit Ã±Ã²Ã Ã­Ã®Ã¢Ã¨Ã²Ã±Ã¿ Ã­Ã Ã¦Ã Ã²Ã®Ã©
                 }
                 else
                 {
-                    m_isRetryButtonPressed = true; //èíà÷å êíîïêà Retry ñòàíîâèòñÿ íàæàòîé
+                    m_isRetryButtonPressed = true; //Ã¨Ã­Ã Ã·Ã¥ ÃªÃ­Ã®Ã¯ÃªÃ  Retry Ã±Ã²Ã Ã­Ã®Ã¢Ã¨Ã²Ã±Ã¿ Ã­Ã Ã¦Ã Ã²Ã®Ã©
                 }
                 break;
             }
@@ -68,30 +68,30 @@ void GameOver::ProcessInput() //ôóíêöèÿ äëÿ îáðàáîòêè ââîäà ïîëüçîâàòåëÿ è îáíîâ
         }
     }
 }
-void GameOver::Init() //ñîçäàíèå îêíà îêîí÷àíèÿ èãðû
+void GameOver::Init() //Ã±Ã®Ã§Ã¤Ã Ã­Ã¨Ã¥ Ã®ÃªÃ­Ã  Ã®ÃªÃ®Ã­Ã·Ã Ã­Ã¨Ã¿ Ã¨Ã£Ã°Ã»
 {
     setlocale(LC_ALL, "");
     m_gameOverTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT));
-    m_gameOverTitle.setString(L"Âû ïðîèãðàëè...!");
+    m_gameOverTitle.setString(L"Ã‚Ã» Ã¯Ã°Ã®Ã¨Ã£Ã°Ã Ã«Ã¨...!");
     m_gameOverTitle.setCharacterSize(80);
     m_gameOverTitle.setOrigin(m_gameOverTitle.getLocalBounds().width / 2, m_gameOverTitle.getLocalBounds().height / 2);
     m_gameOverTitle.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2 - 100.f);
 
     
     m_retryButton.setFont(m_context->m_assets->GetFont(MAIN_FONT));
-    m_retryButton.setString(L"Ïðîäîëæèòü èãðó");
+    m_retryButton.setString(L"ÃÃ°Ã®Ã¤Ã®Ã«Ã¦Ã¨Ã²Ã¼ Ã¨Ã£Ã°Ã³");
     m_retryButton.setOrigin(m_retryButton.getLocalBounds().width / 2 + 60.f, m_retryButton.getLocalBounds().height / 2);
     m_retryButton.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2 - 10.f);
     m_retryButton.setCharacterSize(50);
 
     
     m_exitButton.setFont(m_context->m_assets->GetFont(MAIN_FONT));
-    m_exitButton.setString(L"Âûõîä");
+    m_exitButton.setString(L"Ã‚Ã»ÃµÃ®Ã¤");
     m_exitButton.setOrigin(m_exitButton.getLocalBounds().width / 2 + 25.f, m_exitButton.getLocalBounds().height / 2);
     m_exitButton.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2 + 60.f);
     m_exitButton.setCharacterSize(50);
 }
-void GameOver::Update(sf::Time deltaTime) //îáíîâëåíèå öâåòà è êîíòåêñòà â çàâèñèìîñòè îò âûáðàííîé êíîïêè
+void GameOver::Update(sf::Time deltaTime) //Ã®Ã¡Ã­Ã®Ã¢Ã«Ã¥Ã­Ã¨Ã¥ Ã¶Ã¢Ã¥Ã²Ã  Ã¨ ÃªÃ®Ã­Ã²Ã¥ÃªÃ±Ã²Ã  Ã¢ Ã§Ã Ã¢Ã¨Ã±Ã¨Ã¬Ã®Ã±Ã²Ã¨ Ã®Ã² Ã¢Ã»Ã¡Ã°Ã Ã­Ã­Ã®Ã© ÃªÃ­Ã®Ã¯ÃªÃ¨
 {
     if (m_isRetryButtonSelected)
     {
@@ -104,11 +104,11 @@ void GameOver::Update(sf::Time deltaTime) //îáíîâëåíèå öâåòà è êîíòåêñòà â çàâèñ
         m_retryButton.setFillColor(sf::Color::White);
     }
 
-    if (m_isRetryButtonPressed) //åñëè íàæàòà Retry
+    if (m_isRetryButtonPressed) //Ã¥Ã±Ã«Ã¨ Ã­Ã Ã¦Ã Ã²Ã  Retry
     {
-        m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true); //äîáàâëåíèå íîâîãî ñîñòîÿíèÿ â ñòåê êîíòåêñòà
+        m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true); //Ã¤Ã®Ã¡Ã Ã¢Ã«Ã¥Ã­Ã¨Ã¥ Ã­Ã®Ã¢Ã®Ã£Ã® Ã±Ã®Ã±Ã²Ã®Ã¿Ã­Ã¨Ã¿ Ã¢ Ã±Ã²Ã¥Ãª ÃªÃ®Ã­Ã²Ã¥ÃªÃ±Ã²Ã 
     }
-    else if (m_isExitButtonPressed) //çàêðûòèå îêíà ïðè íàæàòèè Exit
+    else if (m_isExitButtonPressed) //Ã§Ã ÃªÃ°Ã»Ã²Ã¨Ã¥ Ã®ÃªÃ­Ã  Ã¯Ã°Ã¨ Ã­Ã Ã¦Ã Ã²Ã¨Ã¨ Exit
     {
         m_context->m_window->close();
     }
@@ -117,8 +117,8 @@ void GameOver::Update(sf::Time deltaTime) //îáíîâëåíèå öâåòà è êîíòåêñòà â çàâèñ
 void GameOver::Draw()
 {
     m_context->m_window->clear();
-    m_context->m_window->draw(m_gameOverTitle); //ðèñóåì çàãîëîâîê
-    m_context->m_window->draw(m_retryButton); //ðèñóåì êíîïêó Retry
-    m_context->m_window->draw(m_exitButton); //ðèñóåì êíîïêó Exit
-    m_context->m_window->display(); //îòîáðàæåíèå âñåãî íà ýêðàíå
+    m_context->m_window->draw(m_gameOverTitle); //Ã°Ã¨Ã±Ã³Ã¥Ã¬ Ã§Ã Ã£Ã®Ã«Ã®Ã¢Ã®Ãª
+    m_context->m_window->draw(m_retryButton); //Ã°Ã¨Ã±Ã³Ã¥Ã¬ ÃªÃ­Ã®Ã¯ÃªÃ³ Retry
+    m_context->m_window->draw(m_exitButton); //Ã°Ã¨Ã±Ã³Ã¥Ã¬ ÃªÃ­Ã®Ã¯ÃªÃ³ Exit
+    m_context->m_window->display(); //Ã®Ã²Ã®Ã¡Ã°Ã Ã¦Ã¥Ã­Ã¨Ã¥ Ã¢Ã±Ã¥Ã£Ã® Ã­Ã  Ã½ÃªÃ°Ã Ã­Ã¥
 }
