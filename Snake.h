@@ -11,19 +11,19 @@
 class Snake : public sf::Drawable
 {
 private:
-    std::list<sf::Sprite> m_body; //контейнер со спрайтами для тела змейки
-    std::list<sf::Sprite>::iterator m_head; //итератор для обращения к голове
-    std::list<sf::Sprite>::iterator m_tail; //итератор для обращения к хвосту
+    std::list<sf::Sprite> m_body; //РєРѕРЅС‚РµР№РЅРµСЂ СЃРѕ СЃРїСЂР°Р№С‚Р°РјРё РґР»СЏ С‚РµР»Р° Р·РјРµР№РєРё
+    std::list<sf::Sprite>::iterator m_head; //РёС‚РµСЂР°С‚РѕСЂ РґР»СЏ РѕР±СЂР°С‰РµРЅРёСЏ Рє РіРѕР»РѕРІРµ
+    std::list<sf::Sprite>::iterator m_tail; //РёС‚РµСЂР°С‚РѕСЂ РґР»СЏ РѕР±СЂР°С‰РµРЅРёСЏ Рє С…РІРѕСЃС‚Сѓ
 
 public:
     Snake();
     ~Snake();
 
-    void Init(const sf::Texture& texture); //задаются текстуры и начальные позиции спрайтов
-    void Move(const sf::Vector2f& direction); //движение змейки
-    bool IsOn(const sf::Sprite& other) const; //контроль захода головы змейки на другой спрайт (возвращает true, если зашла)
-    void Grow(const sf::Vector2f& direction); //добавление нового кусочка к телу змейки в заданном направлении
-    bool IsSelfIntersecting() const; //контроль захода змейки на саму себя (возвращает true, если зашла)
+    void Init(const sf::Texture& texture); //Р·Р°РґР°СЋС‚СЃСЏ С‚РµРєСЃС‚СѓСЂС‹ Рё РЅР°С‡Р°Р»СЊРЅС‹Рµ РїРѕР·РёС†РёРё СЃРїСЂР°Р№С‚РѕРІ
+    void Move(const sf::Vector2f& direction); //РґРІРёР¶РµРЅРёРµ Р·РјРµР№РєРё
+    bool IsOn(const sf::Sprite& other) const; //РєРѕРЅС‚СЂРѕР»СЊ Р·Р°С…РѕРґР° РіРѕР»РѕРІС‹ Р·РјРµР№РєРё РЅР° РґСЂСѓРіРѕР№ СЃРїСЂР°Р№С‚ (РІРѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё Р·Р°С€Р»Р°)
+    void Grow(const sf::Vector2f& direction); //РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ РєСѓСЃРѕС‡РєР° Рє С‚РµР»Сѓ Р·РјРµР№РєРё РІ Р·Р°РґР°РЅРЅРѕРј РЅР°РїСЂР°РІР»РµРЅРёРё
+    bool IsSelfIntersecting() const; //РєРѕРЅС‚СЂРѕР»СЊ Р·Р°С…РѕРґР° Р·РјРµР№РєРё РЅР° СЃР°РјСѓ СЃРµР±СЏ (РІРѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё Р·Р°С€Р»Р°)
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const override; //отрисовка спрайтов контенера
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override; //РѕС‚СЂРёСЃРѕРІРєР° СЃРїСЂР°Р№С‚РѕРІ РєРѕРЅС‚РµРЅРµСЂР°
 };
