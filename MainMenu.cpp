@@ -13,51 +13,51 @@ MainMenu::~MainMenu()
 {
 }
 
-void MainMenu::ProcessInput() //функция для обработки ввода пользователя и обновления состояния в соотв. с вводом
+void MainMenu::ProcessInput() //С„СѓРЅРєС†РёСЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РІРІРѕРґР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рё РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІ СЃРѕРѕС‚РІ. СЃ РІРІРѕРґРѕРј
 {
     sf::Event event;
-    while (m_context->m_window->pollEvent(event)) //пока есть незавершенные события
+    while (m_context->m_window->pollEvent(event)) //РїРѕРєР° РµСЃС‚СЊ РЅРµР·Р°РІРµСЂС€РµРЅРЅС‹Рµ СЃРѕР±С‹С‚РёСЏ
     {
-        if (event.type == sf::Event::Closed) //закрытие окна
+        if (event.type == sf::Event::Closed) //Р·Р°РєСЂС‹С‚РёРµ РѕРєРЅР°
         {
             m_context->m_window->close();
         }
-        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) //нажата кнопка Enter
+        else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) //РЅР°Р¶Р°С‚Р° РєРЅРѕРїРєР° Enter
         {
-            m_isPlayButtonPressed = true; //иначе кнопка Play нажата
+            m_isPlayButtonPressed = true; //РёРЅР°С‡Рµ РєРЅРѕРїРєР° Play РЅР°Р¶Р°С‚Р°
               
         }
     }
 }
-void MainMenu::Init() //создание окна меню
+void MainMenu::Init() //СЃРѕР·РґР°РЅРёРµ РѕРєРЅР° РјРµРЅСЋ
 {
     setlocale(LC_ALL, "");
     m_context->m_assets->AddFont(MAIN_FONT, "assets/fonts/bitcell_memesbruh03.ttf");   
     m_gameTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT));
-    m_gameTitle.setString(L"Змея");
+    m_gameTitle.setString(L"Р—РјРµСЏ");
     m_gameTitle.setCharacterSize(100);
     m_gameTitle.setOrigin(m_gameTitle.getLocalBounds().width / 2, m_gameTitle.getLocalBounds().height / 2);
     m_gameTitle.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2 - 100.f);
 
     m_gameText.setFont(m_context->m_assets->GetFont(MAIN_FONT));
-    m_gameText.setString(L"Нажмите кнопку Enter, чтобы начать игру :)");
+    m_gameText.setString(L"РќР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ Enter, С‡С‚РѕР±С‹ РЅР°С‡Р°С‚СЊ РёРіСЂСѓ :)");
     m_gameText.setOrigin(m_gameTitle.getLocalBounds().width / 2 + 220.f, m_gameTitle.getLocalBounds().height / 2);
     m_gameText.setPosition(m_context->m_window->getSize().x / 2 - 40.f, m_context->m_window->getSize().y / 2 + 80.f);
     m_gameText.setCharacterSize(50);
     m_gameText.setFillColor(sf::Color::Magenta);
 }
-void MainMenu::Update(sf::Time deltaTime) //обновление контекста
+void MainMenu::Update(sf::Time deltaTime) //РѕР±РЅРѕРІР»РµРЅРёРµ РєРѕРЅС‚РµРєСЃС‚Р°
 {
-    if (m_isPlayButtonPressed) //если нажат Enter
+    if (m_isPlayButtonPressed) //РµСЃР»Рё РЅР°Р¶Р°С‚ Enter
     {
-        m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true); //добавление нового состояния GamePlay в стек 
+        m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true); //РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ GamePlay РІ СЃС‚РµРє 
     }
 }
 
 void MainMenu::Draw()
 {
     m_context->m_window->clear();
-    m_context->m_window->draw(m_gameTitle); //рисуем заголовок
-    m_context->m_window->draw(m_gameText); //рисуем текст
-    m_context->m_window->display(); //отображение всего на экране
+    m_context->m_window->draw(m_gameTitle); //СЂРёСЃСѓРµРј Р·Р°РіРѕР»РѕРІРѕРє
+    m_context->m_window->draw(m_gameText); //СЂРёСЃСѓРµРј С‚РµРєСЃС‚
+    m_context->m_window->display(); //РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РІСЃРµРіРѕ РЅР° СЌРєСЂР°РЅРµ
 }
