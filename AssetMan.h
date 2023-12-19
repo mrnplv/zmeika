@@ -12,18 +12,18 @@ namespace Engine
     class AssetMan
     {
     private:
-        std::map<int, std::unique_ptr<sf::Texture>> m_textures; //контейнер map для текстур (каждое значение ассоциировано с определенным ключом)
-        std::map<int, std::unique_ptr<sf::Font>> m_fonts;  //контейнер map для шрифтов
+        std::map<int, std::unique_ptr<sf::Texture>> m_textures; //РєРѕРЅС‚РµР№РЅРµСЂ map РґР»СЏ С‚РµРєСЃС‚СѓСЂ (РєР°Р¶РґРѕРµ Р·РЅР°С‡РµРЅРёРµ Р°СЃСЃРѕС†РёРёСЂРѕРІР°РЅРѕ СЃ РѕРїСЂРµРґРµР»РµРЅРЅС‹Рј РєР»СЋС‡РѕРј)
+        std::map<int, std::unique_ptr<sf::Font>> m_fonts;  //РєРѕРЅС‚РµР№РЅРµСЂ map РґР»СЏ С€СЂРёС„С‚РѕРІ
 
     public:
         AssetMan();
         ~AssetMan();
 
-        void AddTexture(int id, const std::string& filePath, bool wantRepeated = false); //создание нового объекта текстуры и загрузка изображения по пути файла
-        void AddFont(int id, const std::string& filePath); //создание нового объекта шрифта и загрузка по пути файла
+        void AddTexture(int id, const std::string& filePath, bool wantRepeated = false); //СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РѕР±СЉРµРєС‚Р° С‚РµРєСЃС‚СѓСЂС‹ Рё Р·Р°РіСЂСѓР·РєР° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕ РїСѓС‚Рё С„Р°Р№Р»Р°
+        void AddFont(int id, const std::string& filePath); //СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РѕР±СЉРµРєС‚Р° С€СЂРёС„С‚Р° Рё Р·Р°РіСЂСѓР·РєР° РїРѕ РїСѓС‚Рё С„Р°Р№Р»Р°
 
-        const sf::Texture& GetTexture(int id) const; //получение постоянной ссылки на текстуру, хранящуюся в контейнере, по id
-        const sf::Font& GetFont(int id) const; //получение постоянной ссылки на шрифт, хранящийся в контейнере, по id
+        const sf::Texture& GetTexture(int id) const; //РїРѕР»СѓС‡РµРЅРёРµ РїРѕСЃС‚РѕСЏРЅРЅРѕР№ СЃСЃС‹Р»РєРё РЅР° С‚РµРєСЃС‚СѓСЂСѓ, С…СЂР°РЅСЏС‰СѓСЋСЃСЏ РІ РєРѕРЅС‚РµР№РЅРµСЂРµ, РїРѕ id
+        const sf::Font& GetFont(int id) const; //РїРѕР»СѓС‡РµРЅРёРµ РїРѕСЃС‚РѕСЏРЅРЅРѕР№ СЃСЃС‹Р»РєРё РЅР° С€СЂРёС„С‚, С…СЂР°РЅСЏС‰РёР№СЃСЏ РІ РєРѕРЅС‚РµР№РЅРµСЂРµ, РїРѕ id
     };
 
 } 
