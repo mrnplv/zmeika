@@ -1,4 +1,3 @@
-//управление текстурами и шрифтами
 #include "AssetMan.h"
 
 Engine::AssetMan::AssetMan() 
@@ -9,29 +8,29 @@ Engine::AssetMan::~AssetMan()
 {
 }
 
-void Engine::AssetMan::AddTexture(int id, const std::string& filePath, bool wantRepeated) //создание нового объекта текстуры и загрузка изображения по пути файла, wantRepeated по умолчанию false
+void Engine::AssetMan::AddTexture(int id, const std::string& filePath, bool wantRepeated) //Г±Г®Г§Г¤Г Г­ГЁГҐ Г­Г®ГўГ®ГЈГ® Г®ГЎГєГҐГЄГІГ  ГІГҐГЄГ±ГІГіГ°Г» ГЁ Г§Г ГЈГ°ГіГ§ГЄГ  ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГї ГЇГ® ГЇГіГІГЁ ГґГ Г©Г«Г , wantRepeated ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ false
 {
-    auto texture = std::make_unique<sf::Texture>(); //указатель, который ссылается на объект текстуры
-    if (texture->loadFromFile(filePath)) //если текстура успешно загрузилась из файла
+    auto texture = std::make_unique<sf::Texture>(); //ГіГЄГ Г§Г ГІГҐГ«Гј, ГЄГ®ГІГ®Г°Г»Г© Г±Г±Г»Г«Г ГҐГІГ±Гї Г­Г  Г®ГЎГєГҐГЄГІ ГІГҐГЄГ±ГІГіГ°Г»
+    if (texture->loadFromFile(filePath)) //ГҐГ±Г«ГЁ ГІГҐГЄГ±ГІГіГ°Г  ГіГ±ГЇГҐГёГ­Г® Г§Г ГЈГ°ГіГ§ГЁГ«Г Г±Гј ГЁГ§ ГґГ Г©Г«Г 
     {
-        texture->setRepeated(wantRepeated); //разрешить повторение текстуры вне ее прямоугольника, если wantRepeated = true (по умолчанию false)
-        m_textures[id] = std::move(texture); //добавление текстуры в контейнер в связке с id
+        texture->setRepeated(wantRepeated); //Г°Г Г§Г°ГҐГёГЁГІГј ГЇГ®ГўГІГ®Г°ГҐГ­ГЁГҐ ГІГҐГЄГ±ГІГіГ°Г» ГўГ­ГҐ ГҐГҐ ГЇГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­ГЁГЄГ , ГҐГ±Г«ГЁ wantRepeated = true (ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ false)
+        m_textures[id] = std::move(texture); //Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГІГҐГЄГ±ГІГіГ°Г» Гў ГЄГ®Г­ГІГҐГ©Г­ГҐГ° Гў Г±ГўГїГ§ГЄГҐ Г± id
     }
 }
-void Engine::AssetMan::AddFont(int id, const std::string& filePath) //создание нового объекта шрифта и загрузка по пути файла
+void Engine::AssetMan::AddFont(int id, const std::string& filePath) //Г±Г®Г§Г¤Г Г­ГЁГҐ Г­Г®ГўГ®ГЈГ® Г®ГЎГєГҐГЄГІГ  ГёГ°ГЁГґГІГ  ГЁ Г§Г ГЈГ°ГіГ§ГЄГ  ГЇГ® ГЇГіГІГЁ ГґГ Г©Г«Г 
 {
-    auto font = std::make_unique<sf::Font>(); // указатель, который ссылается на объект шрифта
+    auto font = std::make_unique<sf::Font>(); // ГіГЄГ Г§Г ГІГҐГ«Гј, ГЄГ®ГІГ®Г°Г»Г© Г±Г±Г»Г«Г ГҐГІГ±Гї Г­Г  Г®ГЎГєГҐГЄГІ ГёГ°ГЁГґГІГ 
 
-    if (font->loadFromFile(filePath)) //если шрифт успешно загрузился из файла
+    if (font->loadFromFile(filePath)) //ГҐГ±Г«ГЁ ГёГ°ГЁГґГІ ГіГ±ГЇГҐГёГ­Г® Г§Г ГЈГ°ГіГ§ГЁГ«Г±Гї ГЁГ§ ГґГ Г©Г«Г 
     {
-        m_fonts[id] = std::move(font); //добавление шрифта в контейнер в связке с id
+        m_fonts[id] = std::move(font); //Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГёГ°ГЁГґГІГ  Гў ГЄГ®Г­ГІГҐГ©Г­ГҐГ° Гў Г±ГўГїГ§ГЄГҐ Г± id
     }
 }
-const sf::Texture& Engine::AssetMan::GetTexture(int id) const //получение постоянной ссылки на текстуру, хранящуюся в контейнере, по id
+const sf::Texture& Engine::AssetMan::GetTexture(int id) const //ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЇГ®Г±ГІГ®ГїГ­Г­Г®Г© Г±Г±Г»Г«ГЄГЁ Г­Г  ГІГҐГЄГ±ГІГіГ°Гі, ГµГ°Г Г­ГїГ№ГіГѕГ±Гї Гў ГЄГ®Г­ГІГҐГ©Г­ГҐГ°ГҐ, ГЇГ® id
 {
     return *(m_textures.at(id).get());
 }
-const sf::Font& Engine::AssetMan::GetFont(int id) const //получение постоянной ссылки на шрифт, хранящийся в контейнере, по id
+const sf::Font& Engine::AssetMan::GetFont(int id) const //ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЇГ®Г±ГІГ®ГїГ­Г­Г®Г© Г±Г±Г»Г«ГЄГЁ Г­Г  ГёГ°ГЁГґГІ, ГµГ°Г Г­ГїГ№ГЁГ©Г±Гї Гў ГЄГ®Г­ГІГҐГ©Г­ГҐГ°ГҐ, ГЇГ® id
 {
     return *(m_fonts.at(id).get());
 }
