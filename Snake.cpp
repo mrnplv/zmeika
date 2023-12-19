@@ -1,27 +1,27 @@
 #include "Snake.h"
 
-Snake::Snake() : m_body(std::list<sf::Sprite>(4)) //создается контейнер для тела с 4 элементами
+Snake::Snake() : m_body(std::list<sf::Sprite>(4)) //СЃРѕР·РґР°РµС‚СЃСЏ РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С‚РµР»Р° СЃ 4 СЌР»РµРјРµРЅС‚Р°РјРё
 {
-    m_head = --m_body.end(); //итератор указывает на последний элемент контейнера (голова)
-    m_tail = m_body.begin(); //итератор указывает на первый элемент контейнера (хвост)
+    m_head = --m_body.end(); //РёС‚РµСЂР°С‚РѕСЂ СѓРєР°Р·С‹РІР°РµС‚ РЅР° РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚ РєРѕРЅС‚РµР№РЅРµСЂР° (РіРѕР»РѕРІР°)
+    m_tail = m_body.begin(); //РёС‚РµСЂР°С‚РѕСЂ СѓРєР°Р·С‹РІР°РµС‚ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РєРѕРЅС‚РµР№РЅРµСЂР° (С…РІРѕСЃС‚)
 }
 
 Snake::~Snake()
 {
 }
 
-void Snake::Init(const sf::Texture& texture) //задаются текстуры и начальные позиции спрайтов
+void Snake::Init(const sf::Texture& texture) //Р·Р°РґР°СЋС‚СЃСЏ С‚РµРєСЃС‚СѓСЂС‹ Рё РЅР°С‡Р°Р»СЊРЅС‹Рµ РїРѕР·РёС†РёРё СЃРїСЂР°Р№С‚РѕРІ
 {
     float x = 40.f;
     for (auto& piece : m_body)
     {
-        piece.setTexture(texture); //устанавливается текстура для спрайта
-        piece.setPosition({ x, 40.f }); //устанавливается позиция спрайта
-        x += 40.f; //увеличение х для установки позиции след. спрайта
+        piece.setTexture(texture); //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ С‚РµРєСЃС‚СѓСЂР° РґР»СЏ СЃРїСЂР°Р№С‚Р°
+        piece.setPosition({ x, 40.f }); //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚СЃСЏ РїРѕР·РёС†РёСЏ СЃРїСЂР°Р№С‚Р°
+        x += 40.f; //СѓРІРµР»РёС‡РµРЅРёРµ С… РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РїРѕР·РёС†РёРё СЃР»РµРґ. СЃРїСЂР°Р№С‚Р°
     }
 }
 
-void Snake::Move(const sf::Vector2f& direction)  //движение змейки
+void Snake::Move(const sf::Vector2f& direction)  //РґРІРёР¶РµРЅРёРµ Р·РјРµР№РєРё
 {
     m_tail->setPosition(m_head->getPosition() + direction); 
     m_head = m_tail;
@@ -33,19 +33,19 @@ void Snake::Move(const sf::Vector2f& direction)  //движение змейки
     }
 }
 
-bool Snake::IsOn(const sf::Sprite& other) const //контроль захода головы змейки на другой спрайт (возвращает true, если зашла)
+bool Snake::IsOn(const sf::Sprite& other) const //РєРѕРЅС‚СЂРѕР»СЊ Р·Р°С…РѕРґР° РіРѕР»РѕРІС‹ Р·РјРµР№РєРё РЅР° РґСЂСѓРіРѕР№ СЃРїСЂР°Р№С‚ (РІРѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё Р·Р°С€Р»Р°)
 {
     return other.getGlobalBounds().intersects(m_head->getGlobalBounds());
 }
-void Snake::Grow(const sf::Vector2f& direction) //добавление нового кусочка к телу змейки в заданном направлении
+void Snake::Grow(const sf::Vector2f& direction) //РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ РєСѓСЃРѕС‡РєР° Рє С‚РµР»Сѓ Р·РјРµР№РєРё РІ Р·Р°РґР°РЅРЅРѕРј РЅР°РїСЂР°РІР»РµРЅРёРё
 {
     sf::Sprite newPiece;
-    newPiece.setTexture(*(m_body.begin()->getTexture())); //задаем текстуру нового кусочка
-    newPiece.setPosition(m_head->getPosition() + direction); //задаем позицию
+    newPiece.setTexture(*(m_body.begin()->getTexture())); //Р·Р°РґР°РµРј С‚РµРєСЃС‚СѓСЂСѓ РЅРѕРІРѕРіРѕ РєСѓСЃРѕС‡РєР°
+    newPiece.setPosition(m_head->getPosition() + direction); //Р·Р°РґР°РµРј РїРѕР·РёС†РёСЋ
 
-    m_head = m_body.insert(++m_head, newPiece); //добавляем кусочек в контейнер
+    m_head = m_body.insert(++m_head, newPiece); //РґРѕР±Р°РІР»СЏРµРј РєСѓСЃРѕС‡РµРє РІ РєРѕРЅС‚РµР№РЅРµСЂ
 }
-bool Snake::IsSelfIntersecting() const //контроль захода змейки на саму себя (возвращает true, если зашла)
+bool Snake::IsSelfIntersecting() const //РєРѕРЅС‚СЂРѕР»СЊ Р·Р°С…РѕРґР° Р·РјРµР№РєРё РЅР° СЃР°РјСѓ СЃРµР±СЏ (РІРѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё Р·Р°С€Р»Р°)
 {
     bool flag = false;
     for (auto piece = m_body.begin(); piece != m_body.end(); ++piece)
@@ -61,7 +61,7 @@ bool Snake::IsSelfIntersecting() const //контроль захода змейки на саму себя (во
     }
     return flag;
 }
-void Snake::draw(sf::RenderTarget& target, sf::RenderStates states) const //отрисовка спрайтов контейнера
+void Snake::draw(sf::RenderTarget& target, sf::RenderStates states) const //РѕС‚СЂРёСЃРѕРІРєР° СЃРїСЂР°Р№С‚РѕРІ РєРѕРЅС‚РµР№РЅРµСЂР°
 {
     for (auto& piece : m_body)
     {
