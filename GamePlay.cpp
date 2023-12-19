@@ -7,33 +7,33 @@
 #include <time.h>
 
 
-GamePlay::GamePlay(std::shared_ptr<Context>& context) : m_context(context), //инициализация объекта Context для доступа к окну игры, текстурам и тд. при создании объекта
+GamePlay::GamePlay(std::shared_ptr<Context>& context) : m_context(context), //РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚Р° Context РґР»СЏ РґРѕСЃС‚СѓРїР° Рє РѕРєРЅСѓ РёРіСЂС‹, С‚РµРєСЃС‚СѓСЂР°Рј Рё С‚Рґ. РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р°
 m_snakeDirection({ 40.f, 0.f }),
 m_elapsedTime(sf::Time::Zero),
 m_score(0) 
 {
-    srand(time(nullptr)); //генерация случайных чисел
+    srand(time(nullptr)); //РіРµРЅРµСЂР°С†РёСЏ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
 }
 
 GamePlay::~GamePlay()
 {
 }
 
-void GamePlay::Init() //создание окна игры
+void GamePlay::Init() //СЃРѕР·РґР°РЅРёРµ РѕРєРЅР° РёРіСЂС‹
 {
-    m_context->m_assets->AddTexture(GRASS, "assets/texture/grass.png", true); //добавление текстуры травы с повторением
-    m_context->m_assets->AddTexture(FOOD, "assets/texture/food.png"); //добавление текстуры еды
-    m_context->m_assets->AddTexture(STONE, "assets/texture/stone.png", true); //добавление текстуры ограждений с повторением
-    m_context->m_assets->AddTexture(SNAKE, "assets/texture/snake.png"); //добавление текстуры змейки
+    m_context->m_assets->AddTexture(GRASS, "assets/texture/grass.png", true); //РґРѕР±Р°РІР»РµРЅРёРµ С‚РµРєСЃС‚СѓСЂС‹ С‚СЂР°РІС‹ СЃ РїРѕРІС‚РѕСЂРµРЅРёРµРј
+    m_context->m_assets->AddTexture(FOOD, "assets/texture/food.png"); //РґРѕР±Р°РІР»РµРЅРёРµ С‚РµРєСЃС‚СѓСЂС‹ РµРґС‹
+    m_context->m_assets->AddTexture(STONE, "assets/texture/stone.png", true); //РґРѕР±Р°РІР»РµРЅРёРµ С‚РµРєСЃС‚СѓСЂС‹ РѕРіСЂР°Р¶РґРµРЅРёР№ СЃ РїРѕРІС‚РѕСЂРµРЅРёРµРј
+    m_context->m_assets->AddTexture(SNAKE, "assets/texture/snake.png"); //РґРѕР±Р°РІР»РµРЅРёРµ С‚РµРєСЃС‚СѓСЂС‹ Р·РјРµР№РєРё
 
-    m_grass.setTexture(m_context->m_assets->GetTexture(GRASS)); //присваивание спрайту травы текстуры по ссылке
-    m_grass.setTextureRect(m_context->m_window->getViewport(m_context->m_window->getDefaultView())); //выбор части текстуры, которая будет отображена
+    m_grass.setTexture(m_context->m_assets->GetTexture(GRASS)); //РїСЂРёСЃРІР°РёРІР°РЅРёРµ СЃРїСЂР°Р№С‚Сѓ С‚СЂР°РІС‹ С‚РµРєСЃС‚СѓСЂС‹ РїРѕ СЃСЃС‹Р»РєРµ
+    m_grass.setTextureRect(m_context->m_window->getViewport(m_context->m_window->getDefaultView())); //РІС‹Р±РѕСЂ С‡Р°СЃС‚Рё С‚РµРєСЃС‚СѓСЂС‹, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶РµРЅР°
 
     for (auto& stone : m_stone)
     {
-        stone.setTexture(m_context->m_assets->GetTexture(STONE)); //присваивание спрайтам ограждения текстуры по ссылке
+        stone.setTexture(m_context->m_assets->GetTexture(STONE)); //РїСЂРёСЃРІР°РёРІР°РЅРёРµ СЃРїСЂР°Р№С‚Р°Рј РѕРіСЂР°Р¶РґРµРЅРёСЏ С‚РµРєСЃС‚СѓСЂС‹ РїРѕ СЃСЃС‹Р»РєРµ
     }
-    //настраиваем размеры ограждений
+    //РЅР°СЃС‚СЂР°РёРІР°РµРј СЂР°Р·РјРµСЂС‹ РѕРіСЂР°Р¶РґРµРЅРёР№
     m_stone[0].setTextureRect(sf::IntRect( 0, 0, m_context->m_window->getSize().x, 40 )); 
     m_stone[1].setTextureRect(sf::IntRect(0, 0, m_context->m_window->getSize().x, 40));
     m_stone[1].setPosition(0, m_context->m_window->getSize().y - 40);
@@ -42,30 +42,30 @@ void GamePlay::Init() //создание окна игры
     m_stone[3].setTextureRect(sf::IntRect( 0, 0, 40, m_context->m_window->getSize().y ));
     m_stone[3].setPosition(m_context->m_window->getSize().x - 40, 0);
 
-    m_food.setTexture(m_context->m_assets->GetTexture(FOOD)); //присваивание спрайту еды текстуры по ссылке
-    m_food.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2); //настройка позиции еды
+    m_food.setTexture(m_context->m_assets->GetTexture(FOOD)); //РїСЂРёСЃРІР°РёРІР°РЅРёРµ СЃРїСЂР°Р№С‚Сѓ РµРґС‹ С‚РµРєСЃС‚СѓСЂС‹ РїРѕ СЃСЃС‹Р»РєРµ
+    m_food.setPosition(m_context->m_window->getSize().x / 2, m_context->m_window->getSize().y / 2); //РЅР°СЃС‚СЂРѕР№РєР° РїРѕР·РёС†РёРё РµРґС‹
 
-    m_snake.Init(m_context->m_assets->GetTexture(SNAKE)); //создание змейки
+    m_snake.Init(m_context->m_assets->GetTexture(SNAKE)); //СЃРѕР·РґР°РЅРёРµ Р·РјРµР№РєРё
     
-    //счетчик очков
+    //СЃС‡РµС‚С‡РёРє РѕС‡РєРѕРІ
     m_scoreText.setFont(m_context->m_assets->GetFont(MAIN_FONT)); 
     m_scoreText.setString("SCORE: " + std::to_string(m_score)); 
     m_scoreText.setPosition(10, m_context->m_window->getSize().y - 50);
     m_scoreText.setCharacterSize(40);
 }
-void GamePlay::ProcessInput() //функция для обработки ввода пользователя и обновления состояния в соотв. с вводом
+void GamePlay::ProcessInput() //С„СѓРЅРєС†РёСЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РІРІРѕРґР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рё РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІ СЃРѕРѕС‚РІ. СЃ РІРІРѕРґРѕРј
 {
     sf::Event event;
-    while (m_context->m_window->pollEvent(event)) //пока есть незавершенные события
+    while (m_context->m_window->pollEvent(event)) //РїРѕРєР° РµСЃС‚СЊ РЅРµР·Р°РІРµСЂС€РµРЅРЅС‹Рµ СЃРѕР±С‹С‚РёСЏ
     {
-        if (event.type == sf::Event::Closed) //если имеет место событие закрытия окна
+        if (event.type == sf::Event::Closed) //РµСЃР»Рё РёРјРµРµС‚ РјРµСЃС‚Рѕ СЃРѕР±С‹С‚РёРµ Р·Р°РєСЂС‹С‚РёСЏ РѕРєРЅР°
         {
-            m_context->m_window->close(); //закрыть
+            m_context->m_window->close(); //Р·Р°РєСЂС‹С‚СЊ
         }
-        else if (event.type == sf::Event::KeyPressed) //если же нажата кнопка
+        else if (event.type == sf::Event::KeyPressed) //РµСЃР»Рё Р¶Рµ РЅР°Р¶Р°С‚Р° РєРЅРѕРїРєР°
         {
             sf::Vector2f newDirection = m_snakeDirection;
-            //изменяем направление движения змейки
+            //РёР·РјРµРЅСЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ Р·РјРµР№РєРё
             switch (event.key.code)
             {
             case sf::Keyboard::Up:
@@ -91,7 +91,7 @@ void GamePlay::ProcessInput() //функция для обработки ввода пользователя и обнов
         }
     }
 }
-//адаптация c#
+//Р°РґР°РїС‚Р°С†РёСЏ c#
 //namespace GamePlay
 //{
  /*   void ProcessInput()
@@ -135,47 +135,47 @@ void GamePlay::ProcessInput() //функция для обработки ввода пользователя и обнов
   }*/
 
 
-void GamePlay::Update(sf::Time deltaTime) //обновляет состояние с течением времени
+void GamePlay::Update(sf::Time deltaTime) //РѕР±РЅРѕРІР»СЏРµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ СЃ С‚РµС‡РµРЅРёРµРј РІСЂРµРјРµРЅРё
 {
         m_elapsedTime += deltaTime;
-        if (m_elapsedTime.asSeconds() > 0.1) //если прошло > 0.1 секунды
+        if (m_elapsedTime.asSeconds() > 0.1) //РµСЃР»Рё РїСЂРѕС€Р»Рѕ > 0.1 СЃРµРєСѓРЅРґС‹
         {
             for (auto& stone : m_stone)
             {
-                if (m_snake.IsOn(stone)) //если змейка зашла на камень
+                if (m_snake.IsOn(stone)) //РµСЃР»Рё Р·РјРµР№РєР° Р·Р°С€Р»Р° РЅР° РєР°РјРµРЅСЊ
                 {
-                    m_context->m_states->Add(std::make_unique<GameOver>(m_context), true); //добавление нового состояния GameOver в стек
+                    m_context->m_states->Add(std::make_unique<GameOver>(m_context), true); //РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ GameOver РІ СЃС‚РµРє
                     break;
                 }
             }
 
-            if (m_snake.IsOn(m_food)) //если змейка попала на еду
+            if (m_snake.IsOn(m_food)) //РµСЃР»Рё Р·РјРµР№РєР° РїРѕРїР°Р»Р° РЅР° РµРґСѓ
             {
-                m_snake.Grow(m_snakeDirection); //увеличиваем тело змейки
+                m_snake.Grow(m_snakeDirection); //СѓРІРµР»РёС‡РёРІР°РµРј С‚РµР»Рѕ Р·РјРµР№РєРё
                 int x = 0, y = 0;
 
-                //генерируем новые координаты для еды
+                //РіРµРЅРµСЂРёСЂСѓРµРј РЅРѕРІС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ РµРґС‹
                 x = std::clamp<int>(rand() % m_context->m_window->getSize().x, 40, m_context->m_window->getSize().x - 2 * 40); 
                 y = std::clamp<int>(rand() % m_context->m_window->getSize().y, 40, m_context->m_window->getSize().y - 2 * 40);
 
-                m_food.setPosition(x, y); //устанавливаем еду на новую позицию
-                m_score += 1; //прибавляем очки
-                m_scoreText.setString("SCORE: " + std::to_string(m_score)); //обновляем табло с баллами
+                m_food.setPosition(x, y); //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РµРґСѓ РЅР° РЅРѕРІСѓСЋ РїРѕР·РёС†РёСЋ
+                m_score += 1; //РїСЂРёР±Р°РІР»СЏРµРј РѕС‡РєРё
+                m_scoreText.setString("SCORE: " + std::to_string(m_score)); //РѕР±РЅРѕРІР»СЏРµРј С‚Р°Р±Р»Рѕ СЃ Р±Р°Р»Р»Р°РјРё
             }
             else
             {
-                m_snake.Move(m_snakeDirection); //иначе змейка двигается
+                m_snake.Move(m_snakeDirection); //РёРЅР°С‡Рµ Р·РјРµР№РєР° РґРІРёРіР°РµС‚СЃСЏ
             }
-            if (m_snake.IsSelfIntersecting()) //если змейка зашла на саму себя
+            if (m_snake.IsSelfIntersecting()) //РµСЃР»Рё Р·РјРµР№РєР° Р·Р°С€Р»Р° РЅР° СЃР°РјСѓ СЃРµР±СЏ
             {
-                m_context->m_states->Add(std::make_unique<GameOver>(m_context), true); //добавление нового состояния GameOver в стек и замена состояния на GameOver
+                m_context->m_states->Add(std::make_unique<GameOver>(m_context), true); //РґРѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЃРѕСЃС‚РѕСЏРЅРёСЏ GameOver РІ СЃС‚РµРє Рё Р·Р°РјРµРЅР° СЃРѕСЃС‚РѕСЏРЅРёСЏ РЅР° GameOver
             }
 
-            m_elapsedTime = sf::Time::Zero; //обнуляем таймер
+            m_elapsedTime = sf::Time::Zero; //РѕР±РЅСѓР»СЏРµРј С‚Р°Р№РјРµСЂ
         }
 }
 
-//адаптация c#
+//Р°РґР°РїС‚Р°С†РёСЏ c#
 //namespace GamePlay
 //{
 //void Update(Time deltaTime)
@@ -215,18 +215,18 @@ void GamePlay::Update(sf::Time deltaTime) //обновляет состояние с течением време
 //}
 
 
-void GamePlay::Draw() //передача состояния на экран
+void GamePlay::Draw() //РїРµСЂРµРґР°С‡Р° СЃРѕСЃС‚РѕСЏРЅРёСЏ РЅР° СЌРєСЂР°РЅ
 {
     m_context->m_window->clear();
-    m_context->m_window->draw(m_grass); //отрисовка травы
+    m_context->m_window->draw(m_grass); //РѕС‚СЂРёСЃРѕРІРєР° С‚СЂР°РІС‹
 
     for (auto& stone : m_stone)
     {
-        m_context->m_window->draw(stone); //отрисовка ограды
+        m_context->m_window->draw(stone); //РѕС‚СЂРёСЃРѕРІРєР° РѕРіСЂР°РґС‹
     }
-    m_context->m_window->draw(m_food); //отрисовка еды
-    m_context->m_window->draw(m_snake); //отрисовка змейки
-    m_context->m_window->draw(m_scoreText); //отрисовка счета баллов
+    m_context->m_window->draw(m_food); //РѕС‚СЂРёСЃРѕРІРєР° РµРґС‹
+    m_context->m_window->draw(m_snake); //РѕС‚СЂРёСЃРѕРІРєР° Р·РјРµР№РєРё
+    m_context->m_window->draw(m_scoreText); //РѕС‚СЂРёСЃРѕРІРєР° СЃС‡РµС‚Р° Р±Р°Р»Р»РѕРІ
 
-    m_context->m_window->display(); //отображение всего на экране
+    m_context->m_window->display(); //РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РІСЃРµРіРѕ РЅР° СЌРєСЂР°РЅРµ
 }
